@@ -1,5 +1,5 @@
 {
-    "background_color": "blue",
+    "background_color": "#2B2A33",
     "description": "Simple times tables quiz",
     "display": "fullscreen",
     "icons": [
@@ -11,5 +11,5 @@
     ],
     "name": "Times Tables Quiz",
     "short_name": "Times Tables",
-    "start_url": "/index.html"
+    "start_url": "index.html"
 }

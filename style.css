@@ -26,6 +26,13 @@ body {
     text-align: center;
 }
 
+#add_button {
+    text-align: center;
+    display: block;
+    margin: auto;
+    margin-top: 25px;
+}
+
 /* Hide number input arrows */
 /* https://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box */
 input::-webkit-outer-spin-button,
@@ -38,3 +45,4 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance:textfield; /* Firefox */
 }
+
