@@ -1,7 +1,7 @@
 //Service worker
 //https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Offline_Service_workers
 
-const cacheName = 'TimesTables-v1';
+const cacheName = 'TimesTables-v2';
 const contentToCache = [
     'index.html',
     'script.js',
