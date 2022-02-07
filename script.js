@@ -84,7 +84,7 @@ document.onload = new function () {
 
 //Add service worker
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('script.js');
+    navigator.serviceWorker.register('sw.js');
 };
 
 //Web app install
