@@ -76,6 +76,13 @@ function BreakStreak() {
     streak = 0;
 }
 
+//make problem on start
 document.onload = new function () {
     GenerateNumbers();
+    BreakStreak();
 }
+
+//Add service worker
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('script.js');
+};
