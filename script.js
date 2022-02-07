@@ -63,11 +63,13 @@ function Grade(value) {
             BreakStreak();
         }
 
+        //clear inout and give new question
         input.value = "";
         GenerateNumbers();
     }
 }
 
+//getting one wrong resets the streak and difficulty
 function BreakStreak() {
     minNum = 1;
     maxNum = 12;
