@@ -1,7 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
 body {
     font-family: 'Roboto', sans-serif;
-    color: white;
-    background-color: #2B2A33;
+    color: black;
+    background-color: whitesmoke;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        color: white;
+        background-color: #2B2A33;
+    }
 }
 
 #question {
@@ -11,26 +20,27 @@ body {
 
 .inline {
     display: inline;
-    font-size: 250%;
+    font-size: min(10vw, 500%)
 }
 
 #input {
     border-radius: 5px;
-    width: 75px;
-    height: 37px;
-    font-size: 200%;
+    font-size: min(10vw, 500%);
     text-align: center;
 }
 
 #feedback {
     text-align: center;
+    font-size: min(5vw, 250%)
 }
 
-#add_button {
-    text-align: center;
-    display: block;
-    margin: auto;
-    margin-top: 25px;
+.content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    min-width: 75vw;
 }
 
 /* Hide number input arrows */
@@ -39,10 +49,11 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     display: none;
     -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    margin: 0;
+    /* <-- Apparently some margin are still there even though it's hidden */
 }
 
 input[type=number] {
-    -moz-appearance:textfield; /* Firefox */
+    -moz-appearance: textfield;
+    /* Firefox */
 }
-

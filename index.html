@@ -6,27 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multiplication Game</title>
-    <link rel="manifest" href="manifest.webmanifest">
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
-    </style>
+    <meta name="description" content="Simple times tables quiz. No distractions or ads!">
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div id="question">
-        <p class="inline" id="number_one">1</p>
-        <p class="inline">×</p>
-        <p class="inline" id="number_two">2</p>
-        <p class="inline">=</p>
-        <input id="input" type="number" min="0" max="9999">
+    <div class="content">
+        <div id="question">
+            <p class="inline" id="number_one">1</p>
+            <p class="inline">×</p>
+            <p class="inline" id="number_two">2</p>
+            <p class="inline">=</p>
+            <input id="input" type="number" min="0" max="999">
+        </div>
+        <p id="feedback"></p>
     </div>
-    <p id="feedback"></p>
-
-    <!-- <button id="add_button">Install</button> -->
-
     <script src="script.js"></script>
 </body>
 
