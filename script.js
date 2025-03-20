@@ -1,7 +1,9 @@
 const num1Text = document.getElementById("number_one");
 const num2Text = document.getElementById("number_two");
-const feedback = document.getElementById("feedback");
 const input = document.getElementById("input");
+
+const feedback = document.getElementById("feedback");
+const explanation = document.getElementById("explanation");
 
 let minNum = 1;
 let maxNum = 12;
@@ -13,15 +15,15 @@ let streak;
 
 // Makes 2 random numbers for question
 function GenerateNumbers() {
-    num1 = getRandomInt(minNum, maxNum);
-    num2 = getRandomInt(minNum, maxNum);
+    num1 = RandomInteger(minNum, maxNum);
+    num2 = RandomInteger(minNum, maxNum);
 
     num1Text.innerHTML = num1.toString();
     num2Text.innerHTML = num2.toString();
 }
 
 // Min and max inclusive
-function getRandomInt(min, max) {
+function RandomInteger(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -39,32 +41,37 @@ input.onkeydown = function (ev) {
 function Grade(value) {
     const num = parseInt(value);
 
+    feedback.textContent = "";
+    explanation.textContent = "";
+
     if (isNaN(num)) {
-        feedback.innerHTML = "Please enter a Number";
+        explanation.innerHTML = "Please enter a Number";
     } else {
         if (num1 * num2 == num) {
             streak++;
             if (streak > 1) {
-                feedback.innerHTML = `Correct. ${streak} in a row!`;
+                feedback.textContent = "Correct";
+                explanation.textContent = `${streak} in a row!`;
 
                 //step it up a bit if your going well ;)
                 maxNum = Math.floor(12 + (streak / 3));
             } else {
-                feedback.innerHTML = "Correct!";
+                feedback.textContent = "Correct";
             }
         } else {
-            feedback.innerHTML = `Incorrect. ${num1}×${num2}=<b>${num1 * num2}</b>`;
-            BreakStreak();
+            feedback.textContent = `Incorrect`;
+            explanation.innerHTML = `${num1}×${num2}=<b id="wanted-answer">${num1 * num2}</b>`
+            ResetStreak();
         }
 
-        //clear inout and give new question
+        //clear input and give new question
         input.value = "";
         GenerateNumbers();
     }
 }
 
 // Getting a question wrong resets the streak and difficulty
-function BreakStreak() {
+function ResetStreak() {
     minNum = 1;
     maxNum = 12;
     streak = 0;
@@ -73,5 +80,6 @@ function BreakStreak() {
 // Make problem on start
 document.onload = new function () {
     GenerateNumbers();
-    BreakStreak();
+    ResetStreak();
+    input.focus();
 }

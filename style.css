@@ -12,6 +12,11 @@ body {
         color: white;
         background-color: #2B2A33;
     }
+
+    #input {
+        color: white;
+        background-color: hsl(249, 10%, 35%);
+    }
 }
 
 #question {
@@ -28,11 +33,29 @@ body {
     border-radius: 5px;
     font-size: min(10vw, 500%);
     text-align: center;
+    border: solid gray 3px;
+}
+
+#response {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
 
 #feedback {
-    text-align: center;
-    font-size: min(5vw, 250%)
+    font-size: min(5vw, 150%);
+    margin: 0;
+}
+
+#explanation {
+    font-size: min(5vw, 250%);
+    margin: 0;
+}
+
+#wanted-answer {
+    text-decoration: underline;
+    font-weight: bold;
 }
 
 .content {
