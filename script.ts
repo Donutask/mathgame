@@ -1,26 +1,19 @@
 const num1Text = document.getElementById("number_one") as HTMLParagraphElement;
 const num2Text = document.getElementById("number_two") as HTMLParagraphElement;
+const operatorText = document.getElementById("operator") as HTMLParagraphElement;
+
 const input = document.getElementById("input") as HTMLInputElement;
 
 const feedback = document.getElementById("feedback") as HTMLParagraphElement;
 const explanation = document.getElementById("explanation") as HTMLParagraphElement;
 
-let minNum = 1;
-let maxNum = 12;
-
+let operation: Operator;
 let num1: number;
 let num2: number;
+let answer: number;
 
-let streak: number;
+let streak: number = 0;
 
-// Makes 2 random numbers for question
-function GenerateNumbers() {
-    num1 = RandomInteger(minNum, maxNum);
-    num2 = RandomInteger(minNum, maxNum);
-
-    num1Text.innerHTML = num1.toString();
-    num2Text.innerHTML = num2.toString();
-}
 
 // Min and max inclusive
 function RandomInteger(min: number, max: number) {
@@ -29,11 +22,28 @@ function RandomInteger(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+//Choose random operator and get the corresponding question generator function. 
+// Call function with difficulty value (questions answered right in a row) and display question on screen.
+function GetQuestion() {
+    operation = RandomInteger(0, 3) as Operator;
 
-// When input explicitly entered
-input.onkeydown = function (ev: any) {
-    if (ev.key == "Enter") {
-        Grade(input.value);
+    const questionGenerator = generators.get(operation);
+
+    if (questionGenerator != null) {
+        const results = questionGenerator(streak);
+        num1 = results.n1;
+        num2 = results.n2;
+        answer = results.a;
+
+        num1Text.innerHTML = num1.toString();
+        num2Text.innerHTML = num2.toString();
+        operatorText.textContent = GetOperatorSymbol(operation);
+    }
+    //error 
+    else {
+        num1Text.innerHTML = "uh";
+        num2Text.innerHTML = "oh";
+        operatorText.textContent = "?";
     }
 }
 
@@ -47,37 +57,35 @@ function Grade(value: string) {
     if (isNaN(num)) {
         explanation.innerHTML = "Please enter a Number";
     } else {
-        if (num1 * num2 == num) {
+        if (num == answer) {
             streak++;
             if (streak > 1) {
                 feedback.textContent = "Correct";
                 explanation.textContent = `${streak} in a row!`;
-
-                //step it up a bit if your going well ;)
-                maxNum = Math.floor(12 + (streak / 3));
             } else {
                 feedback.textContent = "Correct";
             }
         } else {
             feedback.textContent = `Incorrect`;
-            explanation.innerHTML = `${num1}×${num2}=<b id="wanted-answer">${num1 * num2}</b>`
-            ResetStreak();
+            explanation.innerHTML = `${num1}${GetOperatorSymbol(operation)}${num2}=<b id="wanted-answer">${answer}</b>`
+            streak = 0;
         }
 
         //clear input and give new question
         input.value = "";
-        GenerateNumbers();
+        GetQuestion();
     }
 }
 
-// Getting a question wrong resets the streak and difficulty
-function ResetStreak() {
-    minNum = 1;
-    maxNum = 12;
-    streak = 0;
+// When input explicitly entered
+input.onkeydown = function (ev: any) {
+    if (ev.key == "Enter") {
+        Grade(input.value);
+    }
 }
 
 // Make problem on start
-GenerateNumbers();
-ResetStreak();
-input.focus();
+document.addEventListener('DOMContentLoaded', () => {
+    GetQuestion();
+    input.focus();
+});
