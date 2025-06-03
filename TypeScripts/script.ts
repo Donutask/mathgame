@@ -57,7 +57,8 @@ function Grade(value: string) {
     feedback.textContent = "";
     explanation.textContent = "";
 
-    if (timeRemaining <= 0) {
+    //prevent answering after time is up
+    if (timeRemaining != undefined && timeRemaining <= 0 && startTime > 0) {
         return;
     }
 
@@ -93,9 +94,16 @@ function Grade(value: string) {
     }
 }
 
-// When input explicitly entered
-input.onkeydown = function (ev: any) {
-    if (ev.key == "Enter") {
-        Grade(input.value);
+input.addEventListener("change", function () {
+    Grade(input.value);
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    LoadOptions();
+
+    if (startTime <= 0) {
+        Begin();
+    } else {
+        ShowBeginScreen();
     }
-}
+});

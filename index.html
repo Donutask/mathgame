@@ -16,7 +16,7 @@
     <div>
         <p id="timer"></p>
     </div>
-    <main class="content">
+    <main id="content">
         <div class="centered_content" id="start_screen">
             <p class="inline">Ready?</p>
             <button class="button" id="start_button" onclick="Begin()">Go!</button>
@@ -28,6 +28,7 @@
             <p class="inline">=</p>
             <input id="input" type="number" min="0" max="999">
         </div>
+
         <div id="response">
             <p id="feedback"></p>
             <p id="explanation"></p>
@@ -45,7 +46,7 @@
     </dialog>
 
     <!-- Idea:  settings bar  that lets you choose which operators to use -->
-    <div id="options_container">
+    <dialog id="options_container">
         <label>
             +
             <input class="question-type-checkbox" type="checkbox" value="+">
@@ -64,14 +65,15 @@
         </label>
         <label>
             Time (s)
-            <input type="number">
-
+            <input id="time_input" type="number" min="0" max="999" maxlength="3">
         </label>
-    </div>
+        <button class="button" onclick="CloseOptions()">Apply</button>
+    </dialog>
 
-    <footer id="links">
-        <button class="text_button">⚙ Settings</button>
-        <a class="link" href="https://donutask.com">More by Donutask</a>
+    <footer>
+        <button id="end_button" class="text_button" onclick="EndGame()">✖ End Game</button>
+        <button id="settings_button" class="text_button" onclick="ShowOptions()">⚙ Settings</button>
+        <!-- <a class="link" href="https://donutask.com">More by Donutask</a> -->
     </footer>
 
     <script src="JavaScripts/operator.js"></script>
@@ -79,7 +81,7 @@
     <script src="JavaScripts/script.js"></script>
     <script src="JavaScripts/timer.js"></script>
     <script src="JavaScripts/gameState.js"></script>
-
+    <script src="JavaScripts/options.js"></script>
 </body>
 
 </html>

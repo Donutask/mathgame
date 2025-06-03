@@ -1,6 +1,6 @@
 "use strict";
 const timerText = document.getElementById("timer");
-let timerStarted = false;
+let startTime = 60;
 let timeRemaining;
 let timerInterval;
 function TickTimer() {
@@ -12,9 +12,11 @@ function TickTimer() {
     }
 }
 function StartTimer() {
-    timeRemaining = 61;
+    if (startTime <= 0) {
+        return;
+    }
+    timeRemaining = startTime + 1;
     TickTimer();
     timerInterval = setInterval(TickTimer, 1000);
-    timerStarted = true;
 }
 ;

@@ -40,7 +40,7 @@ function Grade(value) {
     const num = parseInt(value);
     feedback.textContent = "";
     explanation.textContent = "";
-    if (timeRemaining <= 0) {
+    if (timeRemaining != undefined && timeRemaining <= 0 && startTime > 0) {
         return;
     }
     if (isNaN(num)) {
@@ -71,8 +71,15 @@ function Grade(value) {
         GetQuestion();
     }
 }
-input.onkeydown = function (ev) {
-    if (ev.key == "Enter") {
-        Grade(input.value);
+input.addEventListener("change", function () {
+    Grade(input.value);
+});
+document.addEventListener("DOMContentLoaded", function () {
+    LoadOptions();
+    if (startTime <= 0) {
+        Begin();
     }
-};
+    else {
+        ShowBeginScreen();
+    }
+});
