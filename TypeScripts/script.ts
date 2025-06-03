@@ -14,6 +14,9 @@ let answer: number;
 
 let streak: number = 0;
 
+let totalCorrect: number;
+let totalIncorrect: number;
+let highestStreak: number;
 
 // Min and max inclusive
 function RandomInteger(min: number, max: number) {
@@ -54,11 +57,22 @@ function Grade(value: string) {
     feedback.textContent = "";
     explanation.textContent = "";
 
+    if (timeRemaining <= 0) {
+        return;
+    }
+
     if (isNaN(num)) {
         explanation.innerHTML = "Please enter a Number";
     } else {
         if (num == answer) {
+            //Update stats
             streak++;
+            totalCorrect++;
+            if (streak > highestStreak) {
+                highestStreak = streak;
+            }
+
+            //Show response
             if (streak > 1) {
                 feedback.textContent = "Correct";
                 explanation.textContent = `${streak} in a row!`;
@@ -66,9 +80,11 @@ function Grade(value: string) {
                 feedback.textContent = "Correct";
             }
         } else {
+            streak = 0;
+            totalIncorrect++;
+
             feedback.textContent = `Incorrect`;
             explanation.innerHTML = `${num1}${GetOperatorSymbol(operation)}${num2}=<b id="wanted-answer">${answer}</b>`
-            streak = 0;
         }
 
         //clear input and give new question
@@ -83,9 +99,3 @@ input.onkeydown = function (ev: any) {
         Grade(input.value);
     }
 }
-
-// Make problem on start
-document.addEventListener('DOMContentLoaded', () => {
-    GetQuestion();
-    input.focus();
-});

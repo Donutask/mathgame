@@ -12,8 +12,16 @@
 </head>
 
 <body>
+
+    <div>
+        <p id="timer"></p>
+    </div>
     <main class="content">
-        <div id="question">
+        <div class="centered_content" id="start_screen">
+            <p class="inline">Ready?</p>
+            <button class="button" id="start_button" onclick="Begin()">Go!</button>
+        </div>
+        <div class="centered_content" id="question">
             <p class="inline" id="number_one"></p>
             <p class="inline" id="operator">×</p>
             <p class="inline" id="number_two"></p>
@@ -26,15 +34,51 @@
         </div>
     </main>
 
-    <footer id="links">
-        <a class="link" href="https://donutask.com/pigame/play">π Game</a>
-        <a class="link" href="https://donutask.com">More by Donutask</a>
+    <dialog id="game_over_dialog">
+        <div id="game_over_dialog_content">
+            <h2 id="game_over_heading">Time's Up!</h2>
+            <p>Correct: <b id="correct_stat"></b></p>
+            <p>Incorrect: <b id="incorrect_stat"></b></p>
+            <p>Highest Streak: <b id="streak_stat"></b></p>
+            <button id="game_over_button" class="button" onclick="ShowBeginScreen()">Play Again</button>
+        </div>
+    </dialog>
 
+    <!-- Idea:  settings bar  that lets you choose which operators to use -->
+    <div id="options_container">
+        <label>
+            +
+            <input class="question-type-checkbox" type="checkbox" value="+">
+        </label>
+        <label>
+            -
+            <input class="question-type-checkbox" type="checkbox" value="+">
+        </label>
+        <label>
+            x
+            <input class="question-type-checkbox" type="checkbox" value="+">
+        </label>
+        <label>
+            /
+            <input class="question-type-checkbox" type="checkbox" value="+">
+        </label>
+        <label>
+            Time (s)
+            <input type="number">
+
+        </label>
+    </div>
+
+    <footer id="links">
+        <button class="text_button">⚙ Settings</button>
+        <a class="link" href="https://donutask.com">More by Donutask</a>
     </footer>
 
-    <script src="operator.js"></script>
-    <script src="questionGenerator.js"></script>
-    <script src="script.js"></script>
+    <script src="JavaScripts/operator.js"></script>
+    <script src="JavaScripts/questionGenerator.js"></script>
+    <script src="JavaScripts/script.js"></script>
+    <script src="JavaScripts/timer.js"></script>
+    <script src="JavaScripts/gameState.js"></script>
 
 </body>
 

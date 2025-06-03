@@ -10,6 +10,9 @@ let num1;
 let num2;
 let answer;
 let streak = 0;
+let totalCorrect;
+let totalIncorrect;
+let highestStreak;
 function RandomInteger(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -37,12 +40,19 @@ function Grade(value) {
     const num = parseInt(value);
     feedback.textContent = "";
     explanation.textContent = "";
+    if (timeRemaining <= 0) {
+        return;
+    }
     if (isNaN(num)) {
         explanation.innerHTML = "Please enter a Number";
     }
     else {
         if (num == answer) {
             streak++;
+            totalCorrect++;
+            if (streak > highestStreak) {
+                highestStreak = streak;
+            }
             if (streak > 1) {
                 feedback.textContent = "Correct";
                 explanation.textContent = `${streak} in a row!`;
@@ -52,9 +62,10 @@ function Grade(value) {
             }
         }
         else {
+            streak = 0;
+            totalIncorrect++;
             feedback.textContent = `Incorrect`;
             explanation.innerHTML = `${num1}${GetOperatorSymbol(operation)}${num2}=<b id="wanted-answer">${answer}</b>`;
-            streak = 0;
         }
         input.value = "";
         GetQuestion();
@@ -65,7 +76,3 @@ input.onkeydown = function (ev) {
         Grade(input.value);
     }
 };
-document.addEventListener('DOMContentLoaded', () => {
-    GetQuestion();
-    input.focus();
-});
