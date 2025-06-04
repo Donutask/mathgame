@@ -14,6 +14,7 @@ function Begin() {
     totalCorrect = 0;
     totalIncorrect = 0;
     highestStreak = 0;
+    streak = 0;
     startScreen.classList.add("hidden");
     gameScreen.classList.remove("hidden");
     GetQuestion();
@@ -38,7 +39,7 @@ function GameOver() {
         gameOverHeading.textContent = "Time's Up";
     }
     else {
-        gameOverHeading.textContent = "Game Over!";
+        gameOverHeading.textContent = "Game Over";
     }
     replayButton.blur();
 }
@@ -52,7 +53,6 @@ function ShowBeginScreen() {
     gameScreen.classList.add("hidden");
     gameOverModal.close();
     feedback.textContent = "";
-    explanation.textContent = "";
     timerText.textContent = "";
     startButton.focus();
     endGameButton.classList.add("hidden");

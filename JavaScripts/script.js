@@ -4,11 +4,7 @@ const num2Text = document.getElementById("number_two");
 const operatorText = document.getElementById("operator");
 const input = document.getElementById("input");
 const feedback = document.getElementById("feedback");
-const explanation = document.getElementById("explanation");
-let operation;
-let num1;
-let num2;
-let answer;
+let currentQuestion;
 let streak = 0;
 let totalCorrect;
 let totalIncorrect;
@@ -19,16 +15,12 @@ function RandomInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 function GetQuestion() {
-    operation = RandomInteger(0, 3);
-    const questionGenerator = generators.get(operation);
+    const questionGenerator = generators[RandomInteger(0, 3)];
     if (questionGenerator != null) {
-        const results = questionGenerator(streak);
-        num1 = results.n1;
-        num2 = results.n2;
-        answer = results.a;
-        num1Text.innerHTML = num1.toString();
-        num2Text.innerHTML = num2.toString();
-        operatorText.textContent = GetOperatorSymbol(operation);
+        currentQuestion = questionGenerator(streak);
+        num1Text.innerHTML = currentQuestion.number1.toString();
+        num2Text.innerHTML = currentQuestion.number2.toString();
+        operatorText.textContent = currentQuestion.operator;
     }
     else {
         num1Text.innerHTML = "uh";
@@ -39,23 +31,21 @@ function GetQuestion() {
 function Grade(value) {
     const num = parseInt(value);
     feedback.textContent = "";
-    explanation.textContent = "";
     if (timeRemaining != undefined && timeRemaining <= 0 && startTime > 0) {
         return;
     }
     if (isNaN(num)) {
-        explanation.innerHTML = "Please enter a Number";
+        feedback.innerHTML = "Please enter a Number";
     }
     else {
-        if (num == answer) {
+        if (num == currentQuestion.answer) {
             streak++;
             totalCorrect++;
             if (streak > highestStreak) {
                 highestStreak = streak;
             }
             if (streak > 1) {
-                feedback.textContent = "Correct";
-                explanation.textContent = `${streak} in a row!`;
+                feedback.textContent = `${streak} in a row${streak > 9 ? "!" : ""}`;
             }
             else {
                 feedback.textContent = "Correct";
@@ -64,8 +54,7 @@ function Grade(value) {
         else {
             streak = 0;
             totalIncorrect++;
-            feedback.textContent = `Incorrect`;
-            explanation.innerHTML = `${num1}${GetOperatorSymbol(operation)}${num2}=<b id="wanted-answer">${answer}</b>`;
+            feedback.innerHTML = `${currentQuestion.number1}${currentQuestion.operator}${currentQuestion.number2}=<b id="wanted-answer">${currentQuestion.answer}</b>`;
         }
         input.value = "";
         GetQuestion();

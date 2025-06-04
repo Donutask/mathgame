@@ -17,6 +17,7 @@ function Begin() {
     totalCorrect = 0;
     totalIncorrect = 0;
     highestStreak = 0;
+    streak = 0;
 
     startScreen.classList.add("hidden");
     gameScreen.classList.remove("hidden");
@@ -47,7 +48,8 @@ function GameOver() {
     if (timeRemaining <= 0 && startTime > 0) {
         gameOverHeading.textContent = "Time's Up";
     } else {
-        gameOverHeading.textContent = "Game Over!";
+        //clicked the end game button
+        gameOverHeading.textContent = "Game Over";
     }
 
     replayButton.blur();
@@ -66,7 +68,6 @@ function ShowBeginScreen() {
     gameOverModal.close();
 
     feedback.textContent = "";
-    explanation.textContent = "";
     timerText.textContent = "";
 
     startButton.focus();

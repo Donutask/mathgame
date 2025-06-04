@@ -109,11 +109,6 @@ button {
 }
 
 #feedback {
-    font-size: min(5vw, 150%);
-    margin: 0;
-}
-
-#explanation {
     font-size: min(5vw, 250%);
     margin: 0;
 }

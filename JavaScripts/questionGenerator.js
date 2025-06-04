@@ -1,15 +1,24 @@
 "use strict";
-let generators = new Map();
-generators.set(Operator.Addition, Addition);
-generators.set(Operator.Subtraction, Subtraction);
-generators.set(Operator.Multiplication, Multiplication);
-generators.set(Operator.Division, Division);
+class Question {
+    constructor(operator, number1, number2, answer) {
+        this.operator = operator;
+        this.number1 = number1;
+        this.number2 = number2;
+        this.answer = answer;
+    }
+}
+let generators = [
+    Addition,
+    Subtraction,
+    Multiplication,
+    Division,
+];
 function Addition(difficulty) {
     let minNum = 1;
     let maxNum = Math.floor(10 + (difficulty / 1.1));
-    num1 = RandomInteger(minNum, maxNum);
-    num2 = RandomInteger(minNum, maxNum);
-    return { n1: num1, n2: num2, a: num1 + num2 };
+    let num1 = RandomInteger(minNum, maxNum);
+    let num2 = RandomInteger(minNum, maxNum);
+    return new Question("+", num1, num2, num1 + num2);
 }
 ;
 function Subtraction(difficulty) {
@@ -17,23 +26,23 @@ function Subtraction(difficulty) {
     let maxNum = Math.floor(10 + (difficulty / 1.1));
     let num1 = RandomInteger(minNum, maxNum);
     let num2 = RandomInteger(minNum, num1);
-    return { n1: num1, n2: num2, a: num1 - num2 };
+    return new Question("−", num1, num2, num1 - num2);
 }
 ;
 function Multiplication(difficulty) {
     let minNum = 1;
     let maxNum = Math.floor(10 + (difficulty / 3));
-    num1 = RandomInteger(minNum, maxNum);
-    num2 = RandomInteger(minNum, maxNum);
-    return { n1: num1, n2: num2, a: num1 * num2 };
+    let num1 = RandomInteger(minNum, maxNum);
+    let num2 = RandomInteger(minNum, maxNum);
+    return new Question("×", num1, num2, num1 * num2);
 }
 ;
 function Division(difficulty) {
     let minNum = 1;
     let maxNum = Math.floor(10 + (difficulty / 3));
-    num1 = RandomInteger(minNum, maxNum);
-    num2 = RandomInteger(minNum, maxNum);
+    let num1 = RandomInteger(minNum, maxNum);
+    let num2 = RandomInteger(minNum, maxNum);
     let product = num1 * num2;
-    return { n1: product, n2: num2, a: product / num2 };
+    return new Question("÷", product, num2, product / num2);
 }
 ;

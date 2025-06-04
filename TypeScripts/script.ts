@@ -5,12 +5,8 @@ const operatorText = document.getElementById("operator") as HTMLParagraphElement
 const input = document.getElementById("input") as HTMLInputElement;
 
 const feedback = document.getElementById("feedback") as HTMLParagraphElement;
-const explanation = document.getElementById("explanation") as HTMLParagraphElement;
 
-let operation: Operator;
-let num1: number;
-let num2: number;
-let answer: number;
+let currentQuestion: Question;
 
 let streak: number = 0;
 
@@ -28,19 +24,14 @@ function RandomInteger(min: number, max: number) {
 //Choose random operator and get the corresponding question generator function. 
 // Call function with difficulty value (questions answered right in a row) and display question on screen.
 function GetQuestion() {
-    operation = RandomInteger(0, 3) as Operator;
-
-    const questionGenerator = generators.get(operation);
+    const questionGenerator = generators[RandomInteger(0, 3)];
 
     if (questionGenerator != null) {
-        const results = questionGenerator(streak);
-        num1 = results.n1;
-        num2 = results.n2;
-        answer = results.a;
+        currentQuestion = questionGenerator(streak);
 
-        num1Text.innerHTML = num1.toString();
-        num2Text.innerHTML = num2.toString();
-        operatorText.textContent = GetOperatorSymbol(operation);
+        num1Text.innerHTML = currentQuestion.number1.toString();
+        num2Text.innerHTML = currentQuestion.number2.toString();
+        operatorText.textContent = currentQuestion.operator;
     }
     //error 
     else {
@@ -55,7 +46,6 @@ function Grade(value: string) {
     const num: number = parseInt(value);
 
     feedback.textContent = "";
-    explanation.textContent = "";
 
     //prevent answering after time is up
     if (timeRemaining != undefined && timeRemaining <= 0 && startTime > 0) {
@@ -63,9 +53,9 @@ function Grade(value: string) {
     }
 
     if (isNaN(num)) {
-        explanation.innerHTML = "Please enter a Number";
+        feedback.innerHTML = "Please enter a Number";
     } else {
-        if (num == answer) {
+        if (num == currentQuestion.answer) {
             //Update stats
             streak++;
             totalCorrect++;
@@ -75,8 +65,7 @@ function Grade(value: string) {
 
             //Show response
             if (streak > 1) {
-                feedback.textContent = "Correct";
-                explanation.textContent = `${streak} in a row!`;
+                feedback.textContent = `${streak} in a row${streak > 9 ? "!" : ""}`;
             } else {
                 feedback.textContent = "Correct";
             }
@@ -84,8 +73,7 @@ function Grade(value: string) {
             streak = 0;
             totalIncorrect++;
 
-            feedback.textContent = `Incorrect`;
-            explanation.innerHTML = `${num1}${GetOperatorSymbol(operation)}${num2}=<b id="wanted-answer">${answer}</b>`
+            feedback.innerHTML = `${currentQuestion.number1}${currentQuestion.operator}${currentQuestion.number2}=<b id="wanted-answer">${currentQuestion.answer}</b>`
         }
 
         //clear input and give new question
