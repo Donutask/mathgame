@@ -1,3 +1,3 @@
-# Multiplication-Game
+# Math Game
 
-A basic times table quiz. Two numbers, what do they multiply to? It gets harder the more you get right.
+Simple mental math quiz because I suck at it lol
