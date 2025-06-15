@@ -26,7 +26,7 @@
             <p class="inline" id="operator"></p>
             <p class="inline" id="number_two"></p>
             <p class="inline">=</p>
-            <input id="input" type="number" min="0" max="999">
+            <input id="input" class="number-input" type="number" min="0" max="999">
         </div>
 
         <div id="response">
@@ -48,33 +48,35 @@
         <div class="modal_content" id="options_content">
             <h2 class="modal_heading" id="options_heading">Options</h2>
 
+            <p>Included Questions</p>
             <div>
-                <label>
+                <label class="question-type-label" for="question_type_checkbox_0">
                     +
-                    <input id="question_type_checkbox_0" class="question-type-checkbox" type="checkbox">
                 </label>
-                <label>
+                <input id="question_type_checkbox_0" class="question-type-checkbox" type="checkbox">
+                <label class="question-type-label" for="question_type_checkbox_1">
                     -
-                    <input id="question_type_checkbox_1" class="question-type-checkbox" type="checkbox">
                 </label>
-                <label>
+                <input id="question_type_checkbox_1" class="question-type-checkbox" type="checkbox">
+                <label class="question-type-label" for="question_type_checkbox_2">
                     ×
-                    <input id="question_type_checkbox_2" class="question-type-checkbox" type="checkbox">
                 </label>
-                <label>
+                <input id="question_type_checkbox_2" class="question-type-checkbox" type="checkbox">
+                <label class="question-type-label" for="question_type_checkbox_3">
                     ÷
-                    <input id="question_type_checkbox_3" class="question-type-checkbox" type="checkbox">
                 </label>
-                <label>
+                <input id="question_type_checkbox_3" class="question-type-checkbox" type="checkbox">
+                <label class="question-type-label" for="question_type_checkbox_4">
                     %
-                    <input id="question_type_checkbox_4" class="question-type-checkbox" type="checkbox">
                 </label>
+                <input id="question_type_checkbox_4" class="question-type-checkbox" type="checkbox">
             </div>
-            <label>
-                Time (s)
-                <input id="time_input" type="number" min="0" max="999" maxlength="3">
-            </label>
-            <p id="options_error"></p>
+            <p>
+                <label for="time-input">
+                    Time (s)
+                </label>
+            </p>
+            <input id="time-input" class="number-input" type="number" min="0" max="999" maxlength="3">
             <button class="button modal_button" onclick="CloseOptions()">Apply</button>
         </div>
     </dialog>
