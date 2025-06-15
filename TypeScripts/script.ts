@@ -123,7 +123,7 @@ function Grade(value: string) {
             feedback.innerHTML = `${currentQuestion.number1}${currentQuestion.operator}${currentQuestion.number2}=<b id="wanted-answer">${currentQuestion.answer}</b>`
         }
 
-        //clear input and give new question
+        //Clear input and give new question
         input.value = "";
         GetQuestion();
     }
