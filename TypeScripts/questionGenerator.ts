@@ -11,22 +11,24 @@ class Question {
     }
 }
 
-let generators: ((difficulty: number) => Question)[] = [
-    Addition,
-    Subtraction,
-    Multiplication,
-    Division,
-    Percentage
-];
+type QuestionGenerator = ((difficulty: number) => Question);
 
+const generators: QuestionGenerator[] = [];
 // How many of each generator to put into shuffle bag
-let generatorWeight = [
-    3,
-    3,
-    2,
-    2,
-    1
-]
+const generatorWeight: number[] = [];
+
+// Adds the generator function to the list and creates input box UI
+function AddQuestionGenerator(generator: QuestionGenerator, weight: number): void {
+    generators.push(generator);
+    generatorWeight.push(weight);
+
+    let optionsCheckbox = document.createElement("input");
+    optionsCheckbox.type = "checkbox";
+    optionsCheckbox.id = "question_type_checkbox_" + (generators.length - 1);
+    optionsCheckbox.className = "question-type-checkbox";
+
+    questionTypeCheckboxParent.appendChild(optionsCheckbox);
+}
 
 function Addition(difficulty: number): Question {
 
@@ -61,8 +63,6 @@ function Subtraction(difficulty: number): Question {
     return new Question("−", num1, num2, num1 - num2);
 };
 
-
-
 function Division(difficulty: number): Question {
     let minNum = 1;
     let maxNum = Math.floor(10 + (difficulty / 3));
@@ -74,7 +74,6 @@ function Division(difficulty: number): Question {
 
     return new Question("÷", product, num2, product / num2);
 };
-
 
 function Multiplication(difficulty: number): Question {
     let num1: number;
@@ -88,8 +87,6 @@ function Multiplication(difficulty: number): Question {
 
     return new Question("×", num1, num2, num1 * num2);
 };
-
-
 
 function Percentage(difficulty: number): Question {
     let minNum = 1;
@@ -107,9 +104,6 @@ function Percentage(difficulty: number): Question {
     }
 
     let answer = RoundTo(((num1 / 100) * num2), 2);
-    //answer = (num1 / 100) * num2
-    //num1 = (100 * answer)/num2
-    //num2 = (100 * answer)/num1
 
     return new Question("% of ", num1, num2, answer);
 };

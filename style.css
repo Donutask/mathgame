@@ -1,299 +1,304 @@
-    @import url('https://fonts.googleapis.com/css2?family=Roboto');
+@import url(https://fonts.googleapis.com/css2?family=Roboto);
 
+.button,
+body {
+    color: var(--colour-text)
+}
+
+.inline,
+.number-input {
+    font-size: min(10vw, 500%)
+}
+
+#start_screen p,
+body {
+    margin: 0
+}
+
+#content,
+footer {
+    position: absolute
+}
+
+#timer,
+.centered_content,
+.number-input,
+footer {
+    text-align: center
+}
+
+body {
+    --colour-background: #f5f5f5;
+    --colour-text: black;
+    --colour-text-inverse: white;
+    --colour-link: #525252;
+    --colour-link-accent: #0043d1;
+    --colour-background-surface: white;
+    --colour-shadow: rgba(0, 0, 0, 0.33);
+    font-family: Roboto, sans-serif;
+    background-color: var(--colour-background)
+}
+
+@media (prefers-color-scheme:dark) {
     body {
-        --colour-background: #f5f5f5;
-        --colour-text: black;
-        --colour-text-inverse: white;
-        --colour-link: #525252;
-        --colour-link-accent: #0043d1;
-        --colour-background-surface: white;
-        --colour-shadow: rgba(0, 0, 0, 0.33);
-
-        font-family: 'Roboto', sans-serif;
-        margin: 0px;
-        color: var(--colour-text);
-        background-color: var(--colour-background);
+        --colour-text: white;
+        --colour-text-inverse: black;
+        --colour-background: #2B2A33;
+        --colour-link: #b7b7b7;
+        --colour-link-accent: #64beff;
+        --colour-background-surface: hsl(249, 10%, 35%);
+        --colour-shadow: rgba(255, 255, 255, 0.33)
     }
+}
 
-    @media (prefers-color-scheme: dark) {
-        body {
-            --colour-text: white;
-            --colour-text-inverse: black;
-            --colour-background: #2B2A33;
-            --colour-link: #b7b7b7;
-            --colour-link-accent: #64beff;
-            --colour-background-surface: hsl(249, 10%, 35%);
-            --colour-shadow: rgba(255, 255, 255, 0.33);
-        }
-    }
+.centered_content {
+    padding: 20px
+}
 
-    .centered_content {
-        padding: 20px;
-        text-align: center;
-    }
+#start_screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px
+}
 
-    #start_screen {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        margin: 10px;
-    }
+#content,
+#response {
+    display: flex;
+    flex-direction: column
+}
 
-    #start_screen p {
-        margin: 0;
-    }
+button {
+    cursor: pointer
+}
 
-    button {
-        cursor: pointer;
-    }
+.button {
+    padding: 10px;
+    border: 3px solid gray;
+    outline: 0;
+    border-radius: 10px;
+    box-shadow: var(--colour-shadow) 2px 3px 8px;
+    transition: scale .5s, transform .5s, box-shadow .5s;
+    background-color: var(--colour-background-surface)
+}
 
-    .button {
-        padding: 10px;
-        border: solid gray 3px;
-        outline: none;
-        border-radius: 10px;
-        box-shadow: var(--colour-shadow) 2px 3px 8px;
-        transition: scale 0.5s, transform 0.5s, box-shadow 0.5s;
-        background-color: var(--colour-background-surface);
-        color: var(--colour-text);
-    }
+.button:focus,
+.button:hover {
+    scale: 105%;
+    transform: translateY(-1px)
+}
 
+.button:focus {
+    box-shadow: 0 0 5px 3px var(--colour-link-accent)
+}
 
-    .button:hover,
-    .button:focus {
-        scale: 105%;
-        transform: translateY(-1px);
-    }
+.text_button {
+    color: var(--colour-link);
+    background: 0 0;
+    border: none;
+    outline: 0;
+    text-decoration: underline
+}
 
-    .button:focus {
-        box-shadow: 0px 0px 5px 3px var(--colour-link-accent);
-    }
+#end_button,
+#settings_button {
+    font-size: 1em
+}
 
-    .text_button {
-        color: var(--colour-link);
-        background: none;
-        border: none;
-        outline: none;
-        text-decoration: underline;
-    }
+#start_button {
+    width: 100px;
+    height: 100px;
+    font-size: 3em
+}
 
-    #settings_button,
-    #end_button {
-        font-size: 1em;
-    }
+.inline {
+    display: inline
+}
 
-    #start_button {
-        width: 100px;
-        height: 100px;
-        font-size: 3em;
-    }
+.number-input {
+    border-radius: 5px;
+    border: 3px solid gray;
+    background-color: var(--colour-background-surface);
+    color: var(--colour-text)
+}
 
-    .inline {
-        display: inline;
-        font-size: min(10vw, 500%)
-    }
+.link,
+.link:visited {
+    color: var(--colour-link)
+}
 
-    .number-input {
-        border-radius: 5px;
-        font-size: min(10vw, 500%);
-        text-align: center;
-        border: solid gray 3px;
-        background-color: var(--colour-background-surface);
-        color: var(--colour-text);
-    }
+#response {
+    align-items: center;
+    gap: 10px
+}
 
-    #response {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
+#feedback {
+    font-size: min(5vw, 250%);
+    margin: 0
+}
 
-    #feedback {
-        font-size: min(5vw, 250%);
-        margin: 0;
-    }
+#feedback:after {
+    content: '\200b'
+}
 
-    /* Add invisible character to make feedback always take space */
-    #feedback:after {
-        content: '\200b';
-    }
+#wanted-answer {
+    text-decoration: underline;
+    font-weight: 700
+}
 
-    #wanted-answer {
-        text-decoration: underline;
-        font-weight: bold;
-    }
+#content {
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    min-width: 75vw
+}
 
-    #content {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        -webkit-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-        min-width: 75vw;
+footer {
+    width: 100%;
+    bottom: 10px;
+    overflow: hidden;
+    height: 20px
+}
 
-        display: flex;
-        flex-direction: column;
-    }
+.link {
+    padding: 15px;
+    font-size: .9em
+}
 
-    footer {
-        text-align: center;
-        position: absolute;
-        width: 100%;
-        bottom: 10px;
-        overflow: hidden;
-        height: 20px;
-    }
+.link:focus,
+.link:hover,
+.text_button:focus,
+.text_button:hover {
+    color: var(--colour-link-accent)
+}
 
-    .link {
-        color: var(--colour-link);
-        padding: 15px;
-        font-size: 0.9em;
-    }
+.link:focus {
+    outline: 0
+}
 
-    .link:visited {
-        color: var(--colour-link);
-    }
+.hidden {
+    display: none !important
+}
 
-    .text_button:hover,
-    .text_button:focus,
-    .link:hover,
-    .link:focus {
-        color: var(--colour-link-accent);
-    }
+.modal {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--colour-background);
+    color: var(--colour-text);
+    border: none
+}
 
-    .link:focus {
-        outline: none;
-    }
+.modal_content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400
+}
 
-    .hidden {
-        display: none !important;
-    }
+.modal_content p {
+    margin: 5px;
+    font-size: min(8vw, 1.25em)
+}
 
-    .modal {
-        width: 100vw;
-        height: 100vh;
-        background-color: var(--colour-background);
-        color: var(--colour-text);
-        border: none;
-    }
+.modal_heading {
+    font-size: min(8vw, 2em);
+    margin: 10px
+}
 
-    .modal_content {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        font-weight: normal;
-    }
+.modal_button {
+    width: 100%;
+    max-width: 200px;
+    margin: 15px;
+    font-size: min(10vw, 2em)
+}
 
-    .modal_content p {
-        margin: 5px;
-        font-size: min(8vw, 1.25em);
-    }
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+    display: none;
+    -webkit-appearance: none;
+    margin: 0
+}
 
-    .modal_heading {
-        font-size: min(8vw, 2em);
-        margin: 10px;
-    }
+input[type=number] {
+    appearance: textfield;
+    -moz-appearance: textfield
+}
 
-    .modal_button {
-        width: 100%;
-        max-width: 200px;
-        margin: 15px;
-        font-size: min(10vw, 2em);
-    }
+#timer {
+    font-size: 3em
+}
 
-    /* Hide number input arrows */
-    /* https://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box */
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        display: none;
-        -webkit-appearance: none;
-        margin: 0;
-        /* <-- Apparently some margin are still there even though it's hidden */
-    }
+#time-input {
+    font-size: 2em;
+    border-width: 2px
+}
 
-    input[type=number] {
-        appearance: textfield;
-        -moz-appearance: textfield;
-        /* Firefox */
-    }
+.question-type-label {
+    display: none
+}
 
-    #timer {
-        font-size: 3em;
-        text-align: center;
-    }
+.question-type-checkbox {
+    appearance: none;
+    outline: 0
+}
 
-    #time-input {
-        font-size: 2em;
-        border-width: 2px;
-    }
+.question-type-checkbox::after {
+    display: block;
+    width: 50px;
+    height: 50px;
+    background-color: var(--colour-link);
+    color: var(--colour-text-inverse);
+    border-radius: 6px;
+    font-size: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color .25s, scale .25s, border-radius .25s, box-shadow .25s, font-size .25s;
+    border: none;
+    box-shadow: var(--colour-shadow) 1px 2px 6px;
+    content: "?"
+}
 
-    .question-type-label {
-        display: none;
-    }
+.question-type-checkbox:checked:after {
+    background-color: var(--colour-link-accent);
+    transform: translatey(-1px)
+}
 
-    .question-type-checkbox {
-        appearance: none;
-        outline: none;
+.question-type-checkbox:focus::after,
+.question-type-checkbox:hover::after {
+    scale: 105%;
+    border-radius: 7px;
+    font-size: 3.14em
+}
 
-    }
+.question-type-checkbox:focus::after {
+    box-shadow: 0 0 4px 2px var(--colour-link-accent)
+}
 
-    .question-type-checkbox::after {
-        display: block;
-        width: 50px;
-        height: 50px;
-        background-color: var(--colour-link);
-        color: var(--colour-text-inverse);
-        border-radius: 6px;
-        font-size: 3em;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background-color 0.25s, scale 0.25s, border-radius 0.25s, box-shadow 0.25s, font-size 0.25s;
-        border: none;
-        box-shadow: var(--colour-shadow) 1px 2px 6px;
+.question-type-checkbox:checked:focus:after {
+    box-shadow: 0 0 4px 2px var(--colour-link)
+}
 
-    }
+#question_type_checkbox_0::after {
+    content: "+"
+}
 
-    .question-type-checkbox:checked:after {
-        background-color: var(--colour-link-accent);
-        transform: translatey(-1px);
-    }
+#question_type_checkbox_1::after {
+    content: "−"
+}
 
-    .question-type-checkbox:hover::after,
-    .question-type-checkbox:focus::after {
-        scale: 105%;
-        border-radius: 7px;
-        font-size: 3.14em;
-    }
+#question_type_checkbox_2::after {
+    content: "×"
+}
 
-    .question-type-checkbox:focus::after {
-        box-shadow: 0px 0px 4px 2px var(--colour-link-accent);
-    }
+#question_type_checkbox_3::after {
+    content: "÷"
+}
 
-    .question-type-checkbox:checked:focus:after {
-        box-shadow: 0px 0px 4px 2px var(--colour-link);
-    }
-
-    #question_type_checkbox_0::after {
-        content: "+";
-    }
-
-    #question_type_checkbox_1::after {
-        content: "−";
-    }
-
-    #question_type_checkbox_2::after {
-        content: "×";
-    }
-
-    #question_type_checkbox_3::after {
-        content: "÷";
-    }
-
-    #question_type_checkbox_4::after {
-        content: "%";
-    }
+#question_type_checkbox_4::after {
+    content: "%"
+}

@@ -26,9 +26,26 @@ function RandomInteger(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+//Round number to decimal places
 function RoundTo(num: number, dp: number): number {
     let power = Math.pow(10, dp);
     return Math.round((num + Number.EPSILON) * power) / power;
+}
+
+//(Streak of correct questions in a row * 2) + total questions asked
+function GetDifficulty(): number {
+    return (2 * streak) + totalQuestions;
+}
+
+//More uniform distrobution of question. Utilise weights to put certain amounts of each question in a 'shuffle bag'.
+function MakeShuffleBag() {
+    shuffleBag = [];
+    for (let i = 0; i < generators.length; i++) {
+        if (includedQuestionTypes[i] == true)
+            for (let n = 0; n < generatorWeight[i]; n++) {
+                shuffleBag.push(generators[i]);
+            }
+    }
 }
 
 //Choose random operator and get the corresponding question generator function. 
@@ -66,21 +83,8 @@ function GetQuestion() {
     }
 }
 
-function GetDifficulty(): number {
-    return streak + totalQuestions;
-}
 
-function MakeShuffleBag() {
-    shuffleBag = [];
-    for (let i = 0; i < generators.length; i++) {
-        if (includedQuestionTypes[i] == true)
-            for (let n = 0; n < generatorWeight[i]; n++) {
-                shuffleBag.push(generators[i]);
-            }
-    }
-}
-
-// Show error if not a number, otherwise check if answer matches the multiplication and show appropriate feedback.
+// Show error if not a number, otherwise check if answer matches the Question and show appropriate feedback.
 function Grade(value: string) {
     const num: number = parseFloat(value);
 
@@ -130,6 +134,12 @@ input.addEventListener("change", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
+    AddQuestionGenerator(Addition, 3);
+    AddQuestionGenerator(Subtraction, 3);
+    AddQuestionGenerator(Multiplication, 2);
+    AddQuestionGenerator(Division, 2);
+    AddQuestionGenerator(Percentage, 1);
+
     LoadOptions();
 
     if (startTime <= 0) {

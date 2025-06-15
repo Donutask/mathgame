@@ -7,20 +7,17 @@ class Question {
         this.answer = answer;
     }
 }
-let generators = [
-    Addition,
-    Subtraction,
-    Multiplication,
-    Division,
-    Percentage
-];
-let generatorWeight = [
-    3,
-    3,
-    2,
-    2,
-    1
-];
+const generators = [];
+const generatorWeight = [];
+function AddQuestionGenerator(generator, weight) {
+    generators.push(generator);
+    generatorWeight.push(weight);
+    let optionsCheckbox = document.createElement("input");
+    optionsCheckbox.type = "checkbox";
+    optionsCheckbox.id = "question_type_checkbox_" + (generators.length - 1);
+    optionsCheckbox.className = "question-type-checkbox";
+    questionTypeCheckboxParent.appendChild(optionsCheckbox);
+}
 function Addition(difficulty) {
     let minNum = 1;
     let maxNum = Math.floor(10 + (difficulty / 1.1));

@@ -1,13 +1,7 @@
 "use strict";
 const options = document.getElementById("options_container");
 const timeInput = document.getElementById("time-input");
-const questionTypeCheckboxes = [
-    document.getElementById("question_type_checkbox_0"),
-    document.getElementById("question_type_checkbox_1"),
-    document.getElementById("question_type_checkbox_2"),
-    document.getElementById("question_type_checkbox_3"),
-    document.getElementById("question_type_checkbox_4"),
-];
+const questionTypeCheckboxParent = document.getElementById("question-checkbox-container");
 const keyPrefix = "mathquiz_";
 const timeKey = keyPrefix + "startTime";
 const questionInclusionKey = keyPrefix + "includeQuestion";
@@ -15,7 +9,7 @@ function ShowOptions() {
     options.showModal();
     timeInput.value = startTime.toString();
     for (let i = 0; i < generators.length; i++) {
-        questionTypeCheckboxes[i].checked = includedQuestionTypes[i];
+        document.getElementById("question_type_checkbox_" + i).checked = includedQuestionTypes[i];
     }
 }
 function CloseOptions() {
@@ -26,7 +20,7 @@ function CloseOptions() {
     }
     localStorage.setItem(timeKey, startTime.toString());
     for (let i = 0; i < generators.length; i++) {
-        includedQuestionTypes[i] = questionTypeCheckboxes[i].checked;
+        includedQuestionTypes[i] = document.getElementById("question_type_checkbox_" + i).checked;
         localStorage.setItem(questionInclusionKey + i, includedQuestionTypes[i].toString());
     }
     EnsureQuestionsIncluded();

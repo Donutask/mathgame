@@ -1,13 +1,7 @@
 const options = document.getElementById("options_container") as HTMLDialogElement;
 const timeInput = document.getElementById("time-input") as HTMLInputElement;
+const questionTypeCheckboxParent = document.getElementById("question-checkbox-container") as HTMLDivElement;
 
-const questionTypeCheckboxes: HTMLInputElement[] = [
-    document.getElementById("question_type_checkbox_0") as HTMLInputElement,
-    document.getElementById("question_type_checkbox_1") as HTMLInputElement,
-    document.getElementById("question_type_checkbox_2") as HTMLInputElement,
-    document.getElementById("question_type_checkbox_3") as HTMLInputElement,
-    document.getElementById("question_type_checkbox_4") as HTMLInputElement,
-]
 
 const keyPrefix = "mathquiz_";
 const timeKey = keyPrefix + "startTime";
@@ -19,7 +13,7 @@ function ShowOptions() {
     timeInput.value = startTime.toString();
 
     for (let i = 0; i < generators.length; i++) {
-        questionTypeCheckboxes[i].checked = includedQuestionTypes[i];
+        (document.getElementById("question_type_checkbox_" + i) as HTMLInputElement).checked = includedQuestionTypes[i];
     }
 }
 
@@ -33,7 +27,7 @@ function CloseOptions() {
     localStorage.setItem(timeKey, startTime.toString());
 
     for (let i = 0; i < generators.length; i++) {
-        includedQuestionTypes[i] = questionTypeCheckboxes[i].checked;
+        includedQuestionTypes[i] = (document.getElementById("question_type_checkbox_" + i) as HTMLInputElement).checked;
         localStorage.setItem(questionInclusionKey + i, includedQuestionTypes[i].toString());
     }
 

@@ -22,6 +22,18 @@ function RoundTo(num, dp) {
     let power = Math.pow(10, dp);
     return Math.round((num + Number.EPSILON) * power) / power;
 }
+function GetDifficulty() {
+    return (2 * streak) + totalQuestions;
+}
+function MakeShuffleBag() {
+    shuffleBag = [];
+    for (let i = 0; i < generators.length; i++) {
+        if (includedQuestionTypes[i] == true)
+            for (let n = 0; n < generatorWeight[i]; n++) {
+                shuffleBag.push(generators[i]);
+            }
+    }
+}
 function GetQuestion() {
     const index = RandomInteger(0, shuffleBag.length - 1);
     const questionGenerator = shuffleBag[index];
@@ -45,18 +57,6 @@ function GetQuestion() {
         num1Text.innerHTML = "No Question!";
         num2Text.innerHTML = "";
         operatorText.textContent = "";
-    }
-}
-function GetDifficulty() {
-    return streak + totalQuestions;
-}
-function MakeShuffleBag() {
-    shuffleBag = [];
-    for (let i = 0; i < generators.length; i++) {
-        if (includedQuestionTypes[i] == true)
-            for (let n = 0; n < generatorWeight[i]; n++) {
-                shuffleBag.push(generators[i]);
-            }
     }
 }
 function Grade(value) {
@@ -98,6 +98,11 @@ input.addEventListener("change", function () {
     Grade(input.value);
 });
 document.addEventListener("DOMContentLoaded", function () {
+    AddQuestionGenerator(Addition, 3);
+    AddQuestionGenerator(Subtraction, 3);
+    AddQuestionGenerator(Multiplication, 2);
+    AddQuestionGenerator(Division, 2);
+    AddQuestionGenerator(Percentage, 1);
     LoadOptions();
     if (startTime <= 0) {
         Begin();
