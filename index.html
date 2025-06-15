@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multiplication Game</title>
-    <meta name="description" content="Simple times tables quiz. No distractions or ads!">
+    <title>Mental Math Quiz</title>
+    <meta name="description" content="Simple times mental math quiz. No distractions or ads!">
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -23,7 +23,7 @@
         </div>
         <div class="centered_content" id="question">
             <p class="inline" id="number_one"></p>
-            <p class="inline" id="operator">×</p>
+            <p class="inline" id="operator"></p>
             <p class="inline" id="number_two"></p>
             <p class="inline">=</p>
             <input id="input" type="number" min="0" max="999">
@@ -34,48 +34,56 @@
         </div>
     </main>
 
-    <dialog id="game_over_dialog">
-        <div id="game_over_dialog_content">
-            <h2 id="game_over_heading">Time's Up!</h2>
+    <dialog id="game_over_dialog" class="modal">
+        <div class="modal_content" id="game_over_dialog_content">
+            <h2 class="modal_heading" id="game_over_heading">Time's Up!</h2>
             <p>Correct: <b id="correct_stat"></b></p>
             <p>Incorrect: <b id="incorrect_stat"></b></p>
             <p>Highest Streak: <b id="streak_stat"></b></p>
-            <button id="game_over_button" class="button" onclick="ShowBeginScreen()">Play Again</button>
+            <button id="game_over_button" class="button modal_button" onclick="ShowBeginScreen()">Play Again</button>
         </div>
     </dialog>
 
-    <!-- Idea:  settings bar  that lets you choose which operators to use -->
-    <dialog id="options_container">
-        <label>
-            +
-            <input class="question-type-checkbox" type="checkbox" value="+">
-        </label>
-        <label>
-            -
-            <input class="question-type-checkbox" type="checkbox" value="+">
-        </label>
-        <label>
-            x
-            <input class="question-type-checkbox" type="checkbox" value="+">
-        </label>
-        <label>
-            /
-            <input class="question-type-checkbox" type="checkbox" value="+">
-        </label>
-        <label>
-            Time (s)
-            <input id="time_input" type="number" min="0" max="999" maxlength="3">
-        </label>
-        <button class="button" onclick="CloseOptions()">Apply</button>
+    <dialog id="options_container" class="modal">
+        <div class="modal_content" id="options_content">
+            <h2 class="modal_heading" id="options_heading">Options</h2>
+
+            <div>
+                <label>
+                    +
+                    <input id="question_type_checkbox_0" class="question-type-checkbox" type="checkbox">
+                </label>
+                <label>
+                    -
+                    <input id="question_type_checkbox_1" class="question-type-checkbox" type="checkbox">
+                </label>
+                <label>
+                    ×
+                    <input id="question_type_checkbox_2" class="question-type-checkbox" type="checkbox">
+                </label>
+                <label>
+                    ÷
+                    <input id="question_type_checkbox_3" class="question-type-checkbox" type="checkbox">
+                </label>
+                <label>
+                    %
+                    <input id="question_type_checkbox_4" class="question-type-checkbox" type="checkbox">
+                </label>
+            </div>
+            <label>
+                Time (s)
+                <input id="time_input" type="number" min="0" max="999" maxlength="3">
+            </label>
+            <p id="options_error"></p>
+            <button class="button modal_button" onclick="CloseOptions()">Apply</button>
+        </div>
     </dialog>
 
     <footer>
         <button id="end_button" class="text_button" onclick="EndGame()">✖ End Game</button>
         <button id="settings_button" class="text_button" onclick="ShowOptions()">⚙ Settings</button>
-        <!-- <a class="link" href="https://donutask.com">More by Donutask</a> -->
     </footer>
 
-    <script src="JavaScripts/operator.js"></script>
     <script src="JavaScripts/questionGenerator.js"></script>
     <script src="JavaScripts/script.js"></script>
     <script src="JavaScripts/timer.js"></script>

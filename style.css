@@ -113,6 +113,11 @@ button {
     margin: 0;
 }
 
+/* Add invisible character to make feedback always take space */
+#feedback:after {
+    content: '\200b';
+}
+
 #wanted-answer {
     text-decoration: underline;
     font-weight: bold;
@@ -164,7 +169,7 @@ footer {
     display: none !important;
 }
 
-#game_over_dialog {
+.modal {
     width: 100vw;
     height: 100vh;
     background-color: var(--colour-background);
@@ -172,7 +177,7 @@ footer {
     border: none;
 }
 
-#game_over_dialog_content {
+.modal_content {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -181,17 +186,17 @@ footer {
     font-weight: normal;
 }
 
-#game_over_dialog_content p {
+.modal_content p {
     margin: 5px;
     font-size: min(8vw, 1.25em);
 }
 
-#game_over_heading {
+.modal_heading {
     font-size: min(8vw, 2em);
     margin: 10px;
 }
 
-#game_over_button {
+.modal_button {
     width: 100%;
     max-width: 200px;
     margin: 15px;

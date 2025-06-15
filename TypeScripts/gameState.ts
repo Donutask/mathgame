@@ -18,6 +18,9 @@ function Begin() {
     totalIncorrect = 0;
     highestStreak = 0;
     streak = 0;
+    totalQuestions = 0;
+    previousAnswer = NaN;
+    MakeShuffleBag();
 
     startScreen.classList.add("hidden");
     gameScreen.classList.remove("hidden");

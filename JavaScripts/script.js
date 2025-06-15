@@ -6,32 +6,66 @@ const input = document.getElementById("input");
 const feedback = document.getElementById("feedback");
 let currentQuestion;
 let streak = 0;
+let totalQuestions;
 let totalCorrect;
 let totalIncorrect;
 let highestStreak;
+let shuffleBag;
+let previousAnswer;
+let includedQuestionTypes;
 function RandomInteger(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+function RoundTo(num, dp) {
+    let power = Math.pow(10, dp);
+    return Math.round((num + Number.EPSILON) * power) / power;
+}
 function GetQuestion() {
-    const questionGenerator = generators[RandomInteger(0, 3)];
+    const index = RandomInteger(0, shuffleBag.length - 1);
+    const questionGenerator = shuffleBag[index];
+    shuffleBag.splice(index, 1);
+    if (shuffleBag.length <= 0) {
+        MakeShuffleBag();
+    }
     if (questionGenerator != null) {
-        currentQuestion = questionGenerator(streak);
+        currentQuestion = questionGenerator(GetDifficulty());
+        if (currentQuestion.answer == previousAnswer) {
+            GetQuestion();
+            return;
+        }
+        previousAnswer = currentQuestion.answer;
         num1Text.innerHTML = currentQuestion.number1.toString();
         num2Text.innerHTML = currentQuestion.number2.toString();
         operatorText.textContent = currentQuestion.operator;
+        totalQuestions++;
     }
     else {
-        num1Text.innerHTML = "uh";
-        num2Text.innerHTML = "oh";
-        operatorText.textContent = "?";
+        num1Text.innerHTML = "No Question!";
+        num2Text.innerHTML = "";
+        operatorText.textContent = "";
+    }
+}
+function GetDifficulty() {
+    return streak + totalQuestions;
+}
+function MakeShuffleBag() {
+    shuffleBag = [];
+    for (let i = 0; i < generators.length; i++) {
+        if (includedQuestionTypes[i] == true)
+            for (let n = 0; n < generatorWeight[i]; n++) {
+                shuffleBag.push(generators[i]);
+            }
     }
 }
 function Grade(value) {
-    const num = parseInt(value);
+    const num = parseFloat(value);
     feedback.textContent = "";
     if (timeRemaining != undefined && timeRemaining <= 0 && startTime > 0) {
+        return;
+    }
+    if (currentQuestion == null) {
         return;
     }
     if (isNaN(num)) {
